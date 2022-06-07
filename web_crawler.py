@@ -1,11 +1,12 @@
 import sys
-
-
-def print_hi(name, ARGone, ARGtwo):
-    print(f'Hi, {name}')
-    print(f'Args: URL: {ARGone}, Depth: {ARGtwo}')
+from src import CrawlerLogic
 
 
 if __name__ == '__main__':
-    # TODO: Add here calling for external library facade with argv as list (validation flow is in inner logic)
-    print_hi('PyCharm', sys.argv[1], sys.argv[2])
+    try:
+        x = CrawlerLogic.Crawler(sys.argv[1], sys.argv[2])
+        print(x.crawl())
+    except ValueError as v:
+        print('failed execute web crawler due to illegal depth argument. cause: ', v)
+    except Exception as e:
+        print('failed execute web crawler. cause: ', e)
