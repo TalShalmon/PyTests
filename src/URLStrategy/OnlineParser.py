@@ -26,9 +26,11 @@ class OnlineParser(URLStrategy):
             data = page.read()
             return data.decode('utf-8')
         except HTTPError as http_error:
-            print('error on fetch data', file=sys.stderr)
+            print('Connection error on fetch data', file=sys.stderr)
+        except Exception:
+            print('general error on fetch data', file=sys.stderr)
 
-    def get_regex_for_link_validation(self):
+    def get_regex_for_url_search(self):
         return self.regex_for_link_search
 
     def get_regex_for_domain_extract(self):

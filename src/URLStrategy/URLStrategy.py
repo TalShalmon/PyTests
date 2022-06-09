@@ -11,7 +11,7 @@ class URLStrategy(ABC):
         pass
 
     @abstractmethod
-    def get_regex_for_link_validation(self):
+    def get_regex_for_url_search(self):
         pass
 
     @abstractmethod

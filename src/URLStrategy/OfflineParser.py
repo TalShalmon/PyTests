@@ -5,7 +5,7 @@ from src.URLStrategy.URLStrategy import URLStrategy
 
 class OfflineParser(URLStrategy):
     def __init__(self):
-        self.regex_for_link_search = re.compile(r'(?:href[ ]{0,1}=")([^\"]{0,})"')
+        self.regex_for_url_search = re.compile(r'(?:href[ ]{0,1}=")([^\"]{0,})"')
         self.regex_for_domain_extract = re.compile(r'.*(?:\/)')
 
     def is_valid_url(self, url: str):
@@ -15,8 +15,8 @@ class OfflineParser(URLStrategy):
         with open(ROOT_DIR + target, 'r') as page:
             return page.read().rstrip()
 
-    def get_regex_for_link_validation(self):
-        return self.regex_for_link_search
+    def get_regex_for_url_search(self):
+        return self.regex_for_url_search
 
     def get_regex_for_domain_extract(self):
         return self.regex_for_domain_extract
