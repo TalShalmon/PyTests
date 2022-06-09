@@ -7,13 +7,6 @@ from src.URLStrategy.OnlineParser import OnlineParser
 DEPTH_MAX_VALUE = 100
 
 
-def create_tsv(urls_list) -> str:
-    res = "url\tdepth\tratio"
-    for url in urls_list:
-        res += "\n" + url.url + "\t" + str(url.get_depth()) + "\t" + str(url.get_ratio())
-    return res
-
-
 class Crawler:
     url_fetch_strategy: URLStrategy.URLStrategy
 
@@ -25,9 +18,6 @@ class Crawler:
             self.url_fetch_strategy = OnlineParser()
         else:
             self.url_fetch_strategy = url_fetch_strategy
-
-    def get_result(self):
-        return self.root_url + '<=>' + str(self.depth)
 
     def crawl(self) -> str:
         self.prepare_crawl_action()
@@ -67,3 +57,10 @@ class Crawler:
                     next_level.add(URLData(url, current_depth, DomainUtility.calc_url_domain(url, self.url_fetch_strategy.get_regex_for_domain_extract())))
                     visited.add(url)
         return res
+
+
+def create_tsv(urls_list) -> str:
+    res = "url\tdepth\tratio"
+    for url in urls_list:
+        res += "\n" + url.url + "\t" + str(url.get_depth()) + "\t" + str(url.get_ratio())
+    return res
